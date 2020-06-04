@@ -9,14 +9,14 @@ import 'dart:developer' as developer;
 import 'package:html/dom.dart';
 
 class SeoService {
-  Future<List<Task>> getAllMovies(SearchOptions requestInput) async {
+  Future<List<Task>> getAllMovies(SearchOptions options) async {
     developer
-        .log("------>" + UserAgent.fromType[requestInput.userAgentVersion]);
+        .log("------>" + UserAgent.fromType[options.userAgentVersion]);
     List<Task> movies = [];
     try {
-      var response = await Dio().get(requestInput.domain + requestInput.uri,
+      var response = await Dio().get(options.domain + options.uri,
           options: Options(headers: {
-            'User-Agent': UserAgent.fromType[requestInput.userAgentVersion]
+            'User-Agent': UserAgent.fromType[options.userAgentVersion]
           }));
 
       var document = parse(response.toString());
